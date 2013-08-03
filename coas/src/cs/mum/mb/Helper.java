@@ -77,7 +77,7 @@ public class Helper {
 		      // Send message
 		      //Transport.send(message);
 		      Transport transport = mailSession.getTransport("smtp");
-		      transport.connect( null,from,""); 
+		      transport.connect( null,from,"pass"); 
 		      transport.sendMessage(message,message.getAllRecipients());
 		      //result = "Sent message successfully....v";
 		   }catch (MessagingException mex) {
