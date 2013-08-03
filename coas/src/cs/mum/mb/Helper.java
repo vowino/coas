@@ -15,7 +15,7 @@ import javax.mail.internet.MimeMessage;
 import org.springframework.stereotype.Service;
 @Service
 public class Helper {
-private static final String from = "vctrowino@gmail.com";
+private static final String from = "email@gmail.com";
 
 public String getFrom() {
 return from;
