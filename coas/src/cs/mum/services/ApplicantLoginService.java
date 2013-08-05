@@ -46,6 +46,11 @@ public class ApplicantLoginService {
 	}
 	
 	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public void updateUserLogin(ApplicantLogin login) {
+		applicantLoginDAO.insert(login);
+	}
+	
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
 	public List<ApplicantLogin> getApplicantLoginByUsernamePwd(String userName,String passWord) {
 		return applicantLoginDAO.getApplicantLoginByUsernamePassword(userName, passWord);
 	}
@@ -54,5 +59,5 @@ public class ApplicantLoginService {
 	public List<ApplicantLogin> getApplicantByEmailAddress(String username) {
 		return applicantLoginDAO.getApplicantByEmailAddress(username);
 	}
-
+	
 }

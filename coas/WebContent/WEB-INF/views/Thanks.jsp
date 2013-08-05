@@ -23,14 +23,16 @@
 <body>
 	<div id="container">
 		<header>
+			<c:url var="logoutUrl" value="/doLogout/"/>
 			<h1><span class="blue-text">Computer Professionals Program</span></h1>
-			<h3>Maharishi University of Management, <span class="white-text">USA</span></h3>
+			<h3>Maharishi University of Management, <span class="white-text">USA
+			<a style="color: white" href="${logoutUrl}">Logout(${email})</a></span></h3>
 		</header><!--header end-->
 		
 	<section>
-	<c:url var="logoutUrl" value="/doLogout"/>
-			<h3>Home</h3>
-			Welcome Home page coming soon!!!!!!!!!!!!!!!!!!!!!!!<a href="${logoutUrl}">Logout</a>
+	
+			<h2>Home</h2>
+			Welcome Home page coming soon!!!!!!!!!!!!!!!!!!!!!!!
     </section><!--content end-->
 	
 </div><!--container end-->

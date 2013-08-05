@@ -89,11 +89,7 @@
 					<input type="submit" value="Register">
 				</p>
 				
-				<%-- <%
-         			 ReCaptcha c = ReCaptchaFactory.newReCaptcha("6Ld9WeUSAAAAAD2BNqya9ZEyC_jvUjDY4tQ_-016", "6Ld9WeUSAAAAABHtcI_tBaS8DICZPS12J-dmK6CG ", false);
-         			 out.print(c.createRecaptchaHtml(null, null));
-       			 %> --%>
-       			 <script type="text/javascript"	src="http://api.recaptcha.net/challenge?k=6Ld9WeUSAAAAAD2BNqya9ZEyC_jvUjDY4tQ_-016">
+       			<script type="text/javascript"	src="http://api.recaptcha.net/challenge?k=6Ld9WeUSAAAAAD2BNqya9ZEyC_jvUjDY4tQ_-016">
 				</script>
 				<noscript>
     			<iframe src="http://api.recaptcha.net/noscript?k=6Ld9WeUSAAAAAD2BNqya9ZEyC_jvUjDY4tQ_-016"

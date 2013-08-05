@@ -1,5 +1,6 @@
 package cs.mum.controller;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,16 +12,23 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.support.SessionStatus;
+
+import cs.mum.mb.Helper;
 import cs.mum.model.ApplicantLogin;
 import cs.mum.services.ApplicantLoginService;
 import cs.mum.validation.LoginValidator;
 
 @Controller
+@SessionAttributes("email")
 public class ApplicantLoginController {
 	@Autowired
 	private ApplicantLoginService applicantLoginService;
 	@Autowired
 	LoginValidator loginValidate;
+	@Autowired
+	private Helper helper;
 	
 	@RequestMapping(value = "/")
 	public String login(@ModelAttribute("applicantlogin") ApplicantLogin applicantLogin,BindingResult result) {
@@ -42,8 +50,7 @@ public class ApplicantLoginController {
 			model.addAttribute("login", flag);
 			if (myList.size() > 0) {
 				flag = true;
-				//request.getSession().setAttribute("username", applicantLogin.getUserName());
-				//request.getSession().setAttribute("uid", applicantLogin.getApplicant().getId());
+				model.addAttribute("email", applicantLogin.getUserName());
 				displayPage = "Thanks";// we're supposed to return the menus
 			} else {
 				flag = false;
@@ -54,11 +61,35 @@ public class ApplicantLoginController {
 		}
 
 	}
+	
 	@RequestMapping(value="/doLogout")
-	public String doLogout(HttpServletRequest request) {
+	public String doLogout(SessionStatus sessionStatus) {
 		//controll the session
-		//request.getSession().removeAttribute("username");
-		//request.getSession().removeAttribute("uid");
+		sessionStatus.setComplete();
 		return "redirect:/";
+	}
+	
+	@RequestMapping(value="/recoverMyAccount")
+	public String recoverMyAccount(@ModelAttribute("recoverAccount") ApplicantLogin applicantLogin,
+			BindingResult result) {
+		return "recoverMyAccount";
+	}
+	@RequestMapping(value="/recoverMyAccount", method=RequestMethod.POST)
+	public String recoverMyaccount(@ModelAttribute("recoverAccount") ApplicantLogin applicantLogin,
+			BindingResult result) {
+		loginValidate.validateRecoverAccount(applicantLogin, result);
+		if(result.hasErrors()) {
+			return "recoverMyAccount";
+		}else{
+			String pwd = Helper.randomAlphaNumeric(9);
+			List<ApplicantLogin> login =applicantLoginService.
+					getApplicantByEmailAddress(applicantLogin.getUserName());
+			ApplicantLogin pLogin = login.get(0);
+			pLogin.setPassword(Helper.md5(pwd));
+			applicantLoginService.updateUserLogin(pLogin);
+			helper.sendMail(applicantLogin.getUserName(), pwd, "Account Recovery");
+			return "redirect:/";
+		}
+		
 	}
 }

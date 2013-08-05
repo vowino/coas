@@ -51,15 +51,12 @@
 	<bean id="loginValidator" class="cs.mum.validation.LoginValidator">
 		<property name="applicantLoginService" ref="applicantLoginService"/>
 	</bean>
+	<bean id="helper" class="cs.mum.mb.Helper"></bean>
 
 	<tx:annotation-driven transaction-manager="txManager"/>
 	<bean id="txManager" 
 	class="org.springframework.orm.hibernate4.HibernateTransactionManager">
 		<property name="sessionFactory" ref="sessionFactory" />
 	</bean>
-	
-	<!-- <bean id="reCaptcha" class="net.tanesha.recaptcha.ReCaptchaImpl" 
-	p:publicKey="6Ld9WeUSAAAAAD2BNqya9ZEyC_jvUjDY4tQ_-016" 
-	p:privateKey="6Ld9WeUSAAAAABHtcI_tBaS8DICZPS12J-dmK6CG"/> -->
 	
 </beans>

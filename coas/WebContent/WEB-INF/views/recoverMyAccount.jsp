@@ -26,31 +26,22 @@
 			<h1><span class="blue-text">Computer Professionals Program</span></h1>
 			<h3>Maharishi University of Management, <span class="white-text">USA</span></h3>
 		</header><!--header end-->
+		<nav id = "menu">
+			<ul>
+				<c:url var="homeUrl" value="/"/>
+				<li class="menuitem"><a href="${homeUrl}">Home</a></li>
+			</ul>
+	     </nav><!--menu end-->
 		
 	<section>
-			<h3>Login</h3>
-			
-			<p style="color:#264409; border-color:#C6D880; background:#E6EFC2; font-weight: bold;" align="center">${newAppMsg}</p>
-			<form:form method="post" action="logginApplication" commandName="applicantlogin">
+	<c:url var="recoverMyAccountUrl" value="/recoverMyAccount"/>
+			<h2>Recover Your Account</h2>
+			<form:form action="${recoverMyAccount}" method="POST" commandName="recoverAccount">
 				<form:errors path="*" cssClass="errorblock" element="div"></form:errors>
-				<c:url var="newRegUrl" value="/register.html"/>
-				<c:url var="recoverMyAccountdUrl" value="/recoverMyAccount"/>
 				<p>
-					<form:label path="userName">Email Address: </form:label>
-					<form:input type="text" path="userName" id="userName"/>
-				</p>
-				<p>
-					<form:label path="password">Password: </form:label>
-					<form:input type="password" path="password"/>
-				</p>
-				
-				<p>
-					<a href="${newRegUrl}">Register</a> | 
-					<a href="${recoverMyAccountdUrl}">Forget Password</a>
-				</p>
-			
-				<p>
-					<input type="submit" value="Login">
+					<form:label path="userName">Email Address:</form:label>
+					<form:input type="email" path="userName" id="email" value=""/>
+					<input type="submit" value="Submit">
 				</p>
 			</form:form>
     </section><!--content end-->
