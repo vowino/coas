@@ -54,5 +54,34 @@ public class LoginValidator implements Validator {
 			}
 		}
 	}
+	
+	public void validateChangePassword(Object target, Errors errors, String email) {
+		ApplicantLogin applicantLogin = (ApplicantLogin)target;
+		List<ApplicantLogin> list = applicantLoginService.
+				getApplicantByEmailAddress(email);
+		if(applicantLogin.getPassword() == "" || applicantLogin.getConfirmPassword() == "" || 
+				applicantLogin.getNewPassword() == "") {
+			if(applicantLogin.getPassword() == "") {
+				errors.reject("password", "Password can not be blank!");
+			}
+			
+			if(applicantLogin.getConfirmPassword() == "") {
+				errors.reject("confirmPassword", "Re-type Password can not be blank!");
+			}
+			
+			if(applicantLogin.getNewPassword() == "") {
+				errors.reject("newPassword", "New Password can not be blank!");
+			}
+			
+			if(!applicantLogin.getPassword().equals(list.get(0).getPassword())) {
+				errors.reject("password", "Old password is not correct!");
+			}
+			
+			if(!applicantLogin.getConfirmPassword().equals(applicantLogin.getNewPassword())) {
+				errors.reject("newPassword", "New password and Re-type password does not match!");
+			}
+			return;
+		}
+	}
 
 }

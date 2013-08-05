@@ -30,15 +30,34 @@
 		</header><!--header end-->
 		<nav id = "menu">
 			<ul>
-				<c:url var="changePasswordUrl" value="/changePassword"/>
-				<li class="menuitem"><a href="${changePasswordUrl}">Change Password</a></li>
+				<c:url var="homeUrl" value="/"/>
+				<li class="menuitem"><a href="${homeUrl}">Home</a></li>
 			</ul>
 	     </nav><!--menu end-->
 		
 	<section>
-	
-			<h2>Home</h2>
-			Welcome Home page coming soon!!!!!!!!!!!!!!!!!!!!!!!
+	<c:url var="changePassword" value="/changePassword"/>
+			<h2>Change Password</h2>
+			<form:form action="${changePassword}" method="POST" commandName="changePassword">
+				<form:errors path="*" cssClass="errorblock" element="div"></form:errors>
+				<p>
+					<form:label path="password">Old Password:</form:label>
+					<form:input type="password" path="password" id="password" value=""/>
+				</p>
+				
+				<p>
+					<form:label path="newPassword">New Password:</form:label>
+					<form:input type="password" path="newPassword" id="newPassword" value=""/>
+				</p>
+				<p>
+					<form:label path="confirmPassword">Re-type Password:</form:label>
+					<form:input type="password" path="confirmPassword" id="confirmPassword" value=""/>
+				</p>
+				
+				<p>
+					<input type="submit" value="Submit">
+				</p>
+			</form:form>
     </section><!--content end-->
 	
 </div><!--container end-->

@@ -14,5 +14,7 @@ public interface IApplicantLoginDAO {
 	public List<ApplicantLogin> getApplicantLoginByUsernamePassword(String userName,String passWord);
 	
 	public List<ApplicantLogin> getApplicantByEmailAddress(String username);
-
+	
+	public ApplicantLogin getApplicantLoginByCdatePassword(String cdate, String pwd);
+		
 }

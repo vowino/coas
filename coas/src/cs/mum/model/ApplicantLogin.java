@@ -13,6 +13,7 @@ public class ApplicantLogin {
 	private String userName;
 	private String password;
 	private String confirmPassword;
+	private String newPassword;
 	private Applicant applicant;
 	
 	public ApplicantLogin() {
@@ -60,6 +61,16 @@ public class ApplicantLogin {
 	public void setConfirmPassword(String confirmPassword) {
 		this.confirmPassword = confirmPassword;
 	}
+	
+	@Transient
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+
 	@OneToOne
 	@JoinColumn(name="applicantId")
 	public Applicant getApplicant() {

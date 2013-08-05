@@ -59,5 +59,9 @@ public class ApplicantLoginService {
 	public List<ApplicantLogin> getApplicantByEmailAddress(String username) {
 		return applicantLoginDAO.getApplicantByEmailAddress(username);
 	}
+	@Transactional(propagation = Propagation.REQUIRES_NEW)
+	public ApplicantLogin getApplicantLoginByCdatePassword(String option,String pwd) {
+		return applicantLoginDAO.getApplicantLoginByCdatePassword(option, pwd);
+	}
 	
 }

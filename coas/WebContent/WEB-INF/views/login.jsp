@@ -30,7 +30,8 @@
 	<section>
 			<h3>Login</h3>
 			
-			<p style="color:#264409; border-color:#C6D880; background:#E6EFC2; font-weight: bold;" align="center">${newAppMsg}</p>
+			<p style="color:#264409; border-color:#C6D880; background:#E6EFC2; font-weight: bold;" 
+				align="center">${newAppMsg}</p>
 			<form:form method="post" action="logginApplication" commandName="applicantlogin">
 				<form:errors path="*" cssClass="errorblock" element="div"></form:errors>
 				<c:url var="newRegUrl" value="/register.html"/>
