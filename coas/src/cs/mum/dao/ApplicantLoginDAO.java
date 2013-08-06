@@ -61,10 +61,9 @@ public class ApplicantLoginDAO implements IApplicantLoginDAO {
 
 	@Override
 	public ApplicantLogin getApplicantLoginByCdatePassword(String cdate, String pwd) {
-		String sql = "FROM ApplicantLogin l WHERE password=:pwd and l.applicant.creationDate=:cdate";
+		String sql = "FROM ApplicantLogin l WHERE password=:pwd";
 		Query query = sf.getCurrentSession().createQuery(sql);
 		query.setParameter("pwd", pwd);
-		query.setParameter("cdate", cdate);
 		return (ApplicantLogin)query.uniqueResult();
 	}
 

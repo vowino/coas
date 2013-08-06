@@ -16,8 +16,10 @@ import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 
 import cs.mum.mb.Helper;
+import cs.mum.model.Applicant;
 import cs.mum.model.ApplicantLogin;
 import cs.mum.services.ApplicantLoginService;
+import cs.mum.services.ApplicantService;
 import cs.mum.validation.LoginValidator;
 
 @Controller
@@ -25,6 +27,8 @@ import cs.mum.validation.LoginValidator;
 public class ApplicantLoginController {
 	@Autowired
 	private ApplicantLoginService applicantLoginService;
+	@Autowired
+	private ApplicantService applicantService;
 	@Autowired
 	LoginValidator loginValidate;
 	@Autowired
@@ -125,9 +129,13 @@ public class ApplicantLoginController {
 		}
 	}
 	
-	@RequestMapping(value="/suspiciousLock/option/pwd")
+	@RequestMapping(value="/suspiciousLock/{option}/{pwd}/")
 	//option variable is the MD5() for creation date
 	public String suspiciousLock(@PathVariable String option, @PathVariable String pwd) {
-		return "";
+		ApplicantLogin applicantLogin = applicantLoginService.getApplicantLoginByCdatePassword(option, pwd);
+		Applicant applicant = applicantLogin.getApplicant();
+		applicant.setStatus(false);
+		applicantService.updateApplicant(applicant);
+		return "redirect:/";
 	}
 }
